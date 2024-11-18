@@ -14,6 +14,8 @@ import {
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
+const textColor = "lightblue"  //color of text
+
 // Mock Data
 const evaluationData = {
   totalResponses: 100,
@@ -62,32 +64,106 @@ const EvaluationDashboard = () => {
     ],
   };
 
+  // Bar Chart Options
+  const barChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: textColor, 
+        },
+      },
+      tooltip: {
+        titleColor: "white",
+        bodyColor: "white",
+        backgroundColor: "rgba(0, 0, 0, 0.8)", 
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: textColor, //label color
+        },
+        grid: {
+          color: "white", //line color
+        },
+      },
+      y: {
+        ticks: {
+          color: textColor, //label color
+        },
+        grid: {
+          color: "white", //line color
+        },
+      },
+    },
+  };
+
+  // pie chart options
+  const pieChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: textColor
+        },
+      },
+      tooltip: {
+        titleColor: "white",
+        bodyColor: "white",
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+      },
+    },
+    elements: {
+      arc: {
+        hoverOffset: 20, // how much it rises
+      },
+    },
+  };
+
   return (
-    <div style={{ padding: "20px", maxWidth: "900px", margin: "auto" }}>
-      <h1>RAG Model Evaluation Dashboard</h1>
+    <div style={{ padding: "20px", 
+    maxWidth: "900px", 
+    margin: "auto", 
+    backgroundColor: "black", 
+    color: textColor,
+    borderRadius: "8px",
+    }}>
+       <style>{`
+        body {
+          margin: 0;
+          background-color: #000000;
+          color: #FFFFFF;
+        }
+      `}</style>
+      <h1 style={{ textAlign: "center"}}>
+        RAG Model Evaluation Dashboard</h1>
       <div style={{ marginBottom: "20px" }}>
-        <h2>Overview</h2>
-        <p>
+        <h2 style={{ textAlign: "center"}}>
+        Overview</h2>
+        <p style={{ textAlign: "center"}}>
           <strong>Total Responses:</strong> {evaluationData.totalResponses}
         </p>
-        <p>
+        <p style={{ textAlign: "center"}}>
           <strong>Correct Responses:</strong> {evaluationData.correctResponses} (
           {correctPercentage}%)
         </p>
-        <p>
+        <p style={{ textAlign: "center"}}>
           <strong>Incorrect Responses:</strong> {evaluationData.incorrectResponses} (
           {(100 - correctPercentage).toFixed(2)}%)
         </p>
       </div>
 
       <div style={{ marginBottom: "40px" }}>
-        <h2>Performance Breakdown</h2>
-        <Bar data={barData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
+        <h2 style={{ textAlign: "center"}}>
+            Performance Breakdown</h2>
+        <Bar data={barData} options={barChartOptions} />
       </div>
 
       <div>
-        <h2>Correct vs. Incorrect Responses</h2>
-        <Pie data={pieData} />
+        <h2 style={{ textAlign: "center"}}
+        >Correct vs. Incorrect Responses</h2>
+        <Pie data={pieData} options={pieChartOptions}/>
       </div>
     </div>
   );
