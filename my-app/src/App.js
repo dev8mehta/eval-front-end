@@ -10,6 +10,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import EvaluationDashboardCSV from './EvaluationDashboardCSV';
+import './App.css';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
@@ -89,6 +91,8 @@ const EvaluationDashboard = () => {
         <h2>Correct vs. Incorrect Responses</h2>
         <Pie data={pieData} />
       </div>
+      <hr/>
+      <EvaluationDashboardCSV />
     </div>
   );
 };
