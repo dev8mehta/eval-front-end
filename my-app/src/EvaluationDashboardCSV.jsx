@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Trash2, Save, Download, Upload, Play, PlayCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './card.jsx';
 import Papa from 'papaparse';
+import './App.css';
 
 const EvaluationDashboardCSV = () => {
   const [testCases, setTestCases] = useState([]);
@@ -153,6 +154,7 @@ const EvaluationDashboardCSV = () => {
                   <button 
                     className="text-blue-600 hover:text-blue-800"
                     onClick={() => evaluateTestCase(testCase)}
+                    style={{marginRight: "5px"}}
                   >
                     <PlayCircle size={16} />
                   </button>
@@ -165,6 +167,8 @@ const EvaluationDashboardCSV = () => {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div class="row">
+                <div class="column">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2" style={{ paddingRight: '20px'}}>Input Query</label>
@@ -206,7 +210,9 @@ const EvaluationDashboardCSV = () => {
                     />
                   </div>
                 </div>
+                </div>
 
+                <div class="column">
                 <div className="bg-gray-50 p-4 rounded-md">
                   <h4 className="font-medium mb-2">Evaluation Metrics</h4>
                   <div className="grid grid-cols-4 gap-4">
@@ -238,6 +244,9 @@ const EvaluationDashboardCSV = () => {
                     placeholder="Actual response will appear after evaluation..."
                   />
                 </div>
+                </div>
+                </div>
+                <hr />
               </CardContent>
             </Card>
           ))}
